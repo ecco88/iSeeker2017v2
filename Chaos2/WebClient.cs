@@ -86,9 +86,9 @@ namespace WebClient
                 else if (selector.StartsWith("~"))
                     result = FindElements(By.XPath("//" + tagName + "[@name='" + path + "']"));
                 else result = FindElements(By.XPath(selector));
-
+                attempts++;
             }
-            while (++attempts < pollAttempts && result == null);
+            while ((attempts < pollAttempts) && (result == null));
             return result;
         }
         public bool PageLoaded(int seconds = 1)
@@ -189,7 +189,6 @@ namespace WebClient
             Navigate().GoToUrl(platformURL);
         }
     }
-
     public class OutlookClient : ThinWebClient
     {
         public OutlookClient() : base("https://outlook.office.com/mail/", "C://Selenium")
