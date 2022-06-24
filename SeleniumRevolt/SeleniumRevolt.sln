@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31624.102
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeleniumRevolt", "SeleniumRevolt.csproj", "{DB3A220B-5984-46B4-B54F-B5553B0E6480}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject", "..\TestProject\TestProject.csproj", "{5D65D7BC-2689-4496-AD93-386821A7290D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DB3A220B-5984-46B4-B54F-B5553B0E6480}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB3A220B-5984-46B4-B54F-B5553B0E6480}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB3A220B-5984-46B4-B54F-B5553B0E6480}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB3A220B-5984-46B4-B54F-B5553B0E6480}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D65D7BC-2689-4496-AD93-386821A7290D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D65D7BC-2689-4496-AD93-386821A7290D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D65D7BC-2689-4496-AD93-386821A7290D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D65D7BC-2689-4496-AD93-386821A7290D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5F0F3C91-BA66-4FAE-A0BF-0A7FFD8AD7D2}
+	EndGlobalSection
+EndGlobal
