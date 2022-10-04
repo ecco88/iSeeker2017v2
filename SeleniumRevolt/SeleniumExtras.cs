@@ -10,8 +10,7 @@ using OpenQA.Selenium.Remote;
 
 namespace SeleniumRevolt
 {
-    /*
-    public class SeleniumExtras { 
+    static class SeleniumExtras { 
         /// <summary>
         /// Returns a collection of webElements based on search paramtete
         /// </summary>
@@ -22,8 +21,9 @@ namespace SeleniumRevolt
         /// <param name="tagName">[optional] - return only elements of this tag name.</param>
         /// <param name="poller">[optional] - Poller object which indicates number of attempts before gracefully failing.</param>
         /// <returns> a list of all matching IWebElements and null if not found.</returns>
-        public ReadOnlyCollection<IWebElement> FindElements(this IWebDriver Driver, string selector, string tagName = "*", Poller poller = new Poller(1000,5,3))
+        static ReadOnlyCollection<IWebElement> FindElements(this IWebDriver Driver, string selector, string tagName = "*", Poller poller=null)
         {
+            poller =poller ?? new Poller();
             ReadOnlyCollection<IWebElement> result;
             string xPath = selector;
             string path = selector.Substring(1, selector.Length - 1);
@@ -77,7 +77,7 @@ namespace SeleniumRevolt
         /// <param name="returnIndex">If multiple matches returns this index - defaults to zero.</param>
         /// <param name="poller" required="no">Poller object which indicates number of attempts before gracefully failing.</param>
         /// <returns>IWebElement match and null if not found.</returns>
-        public IWebElement FindElement(this IWebDriver Driver,string selector, string tagName = "*", int returnIndex = 0, Poller poller = new Poller(1000,5,3))
+        static IWebElement FindElement(this IWebDriver Driver, string selector, string tagName = "*", int returnIndex = 0, Poller poller=null)
         {
             var result = FindElements(Driver, selector, tagName, poller);
             return (result == null || result.Count == 0) ? null : result[returnIndex];
@@ -87,12 +87,10 @@ namespace SeleniumRevolt
         /// </summary>
         /// <param name="script">the script itself</param>
         /// <param name="args">list of items to pass to the script as parameters.</param>
-        public void ExecuteJavaScript(string script, params object[] args)
+        static object ExecuteJavaScript(this IWebDriver driver, string script, params object[] args)
         {
-            var js = (IJavaScriptExecutor)this;
-            js.ExecuteScript(script, args);
+            var js = (IJavaScriptExecutor)driver;
+            return js.ExecuteScript(script, args);
         }
-
     }
-    */
 }

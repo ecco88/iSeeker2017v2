@@ -9,35 +9,46 @@ using System.Threading;
 
 namespace SeleniumRevolt
 {
-    public class WebClient : IDisposable
+    public abstract class WebClient 
     {
         public IWebDriver Driver { get; set; }
         public string DriverURL { get; set; }
         public enum BrowserType { Chrome, FireFox, Edge, Other };
-        public BrowserType Browser { get; set; }
+        public BrowserType Browser
+        {
+            get
+            {
+                return _browser;
+            }
+            set
+            {
+                _browser = value;
+                switch (_browser)
+                {
+                    case BrowserType.Chrome:
+                        DriverURL = "C://Selenium";
+                        Driver = new ChromeDriver(DriverURL);
+                        // Driver = (options == null) ? new ChromeDriver(DriverURL) : new ChromeDriver(DriverURL, (ChromeOptions)options);
+                        break;
+                    case BrowserType.FireFox:
+                        DriverURL = "/Drivers/GeckoDriver.exe";
+                        break;
+                    case BrowserType.Edge:
+                        DriverURL = "Drivers/EdgeDriver.exe";
+                        break;
+                    case BrowserType.Other:
+                        DriverURL = "Drivers/WebDriver.exe";
+                        break;
+                }
+            }
+        }
+        private BrowserType _browser;
         public Poller Poller { get; set; }
 
-        public WebClient(string URL, BrowserType browser=BrowserType.Chrome, OpenQA.Selenium.DriverOptions options=null, Poller poller=null)
+        public WebClient(BrowserType browser=BrowserType.Chrome, OpenQA.Selenium.DriverOptions options=null, Poller poller=null)
         { 
-            Browser = browser;
-            switch (Browser)
-            { 
-                case BrowserType.Chrome:
-                    DriverURL = "C://Selenium";                    
-                    Driver = (options == null) ? new ChromeDriver(DriverURL) : new ChromeDriver(DriverURL, (ChromeOptions)options);
-                    break;
-                case BrowserType.FireFox:
-                    DriverURL = "/Drivers/GeckoDriver.exe";
-                    break;
-                case BrowserType.Edge:
-                    DriverURL = "Drivers/EdgeDriver.exe";
-                    break;
-                case BrowserType.Other:
-                    DriverURL = "Drivers/WebDriver.exe";
-                    break;
-            }
+            Browser = browser;          
             Poller = (poller != null) ? poller : new Poller();
-            Driver.Url = URL;
         }
         /// <summary>
         /// Returns a collection of webElements based on search paramtete
@@ -164,5 +175,29 @@ namespace SeleniumRevolt
         {
             Driver.Quit();
         }
+        public abstract void SignIn(string username, string password);
+        public abstract void SignIn();
+    }
+}
+
+namespace SeleniumRevolt
+{
+    public class JaggaerClient : WebClient
+    {
+        public override void SignIn()
+        {
+            throw new NotImplementedException();
+        }
+        public override void SignIn(string username, string password)
+        {
+            throw new NotImplementedException();
+        }
+        public JaggaerClient(bool ProdMode=true, BrowserType browser = BrowserType.Chrome, OpenQA.Selenium.DriverOptions options = null, Poller poller = null)
+        {
+            Browser = browser;
+            Poller = (poller != null) ? poller : new Poller();
+            Driver.Url = "https://" + ((ProdMode) ? "solutions" : "usertest") + ".sciquest.com/apps/Router/Login?OrgName=UPenn";
+        }
+        
     }
 }
